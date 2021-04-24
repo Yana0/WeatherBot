@@ -1,22 +1,21 @@
 import config
 import telebot
-import requests
-from bs4 import BeautifulSoup as BS
+import get_weather
 
-r = requests.get('https://sinoptik.ua/погода-долгопрудный')
-html = BS(r.content, 'html.parser')
+
 bot = telebot.TeleBot(config.token)
 
-for el in html.select('#content'):
-    t_min = el.select('.temperature .min')[0].text
-    t_max = el.select('.temperature .max')[0].text
-    text = el.select('.wDescription .description')[0].text
+
+@bot.message_handler(commands=['weather1'])
+def send(message):
+    text = get_weather.get_weather(1)
+    bot.send_message(message.chat.id, text)
 
 
-@bot.message_handler(commands=['weather'])
-def main(message):
-    bot.send_message(message.chat.id, "Привет, погода на сегодня:\n" +
-        t_min + ', ' + t_max + '\n' + text)
+@bot.message_handler(commands=['weather7'])
+def send(message):
+    text = get_weather.get_weather(7)
+    bot.send_message(message.chat.id, text)
 
 
 if __name__ == '__main__':
