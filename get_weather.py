@@ -7,6 +7,8 @@ url = 'https://sinoptik.ua/погода-долгопрудный/'
 
 def degrees_to_int(string):
     """convert Celsius degrees to integer"""
+    if len(string) < 5:
+        return [0]
     return [int(i[:-1]) for i in string.split(' ')[1:-1]]
 
 
@@ -37,7 +39,7 @@ def get_weather(days):
             text = el.select('.wDescription .description')[0].text
             mem_text = el.select('.oDescription .description')[0].text
 
-        msg_res += '+'.join(["мин: ", t_min, ', ', "макс: ", t_max, '\n', text, '\n\n'])
+        msg_res += ' '.join(["мин: ", t_min, ', ', "макс: ", t_max, '\n', text, '\n\n'])
         if days == 1:
             msg_res += mem_text + '\n\n'
         current_day += datetime.timedelta(days=1)
