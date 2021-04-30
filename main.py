@@ -1,6 +1,7 @@
 import config
 import telebot
 import get_weather
+import tests
 
 
 bot = telebot.TeleBot(config.token)
@@ -31,4 +32,5 @@ def send(message):
 
 
 if __name__ == '__main__':
+    tests.test_all()
     bot.polling(none_stop=True)
