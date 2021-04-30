@@ -27,6 +27,7 @@ class TestInt2Degrees(unittest.TestCase):
 
 
 def test_all():
+    """Run all tests"""
     suite = unittest.TestSuite()
     suite.addTest(TestDegrees2Int('test_positive'))
     suite.addTest(TestDegrees2Int('test_negative'))
