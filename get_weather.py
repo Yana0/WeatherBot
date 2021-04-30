@@ -12,12 +12,11 @@ def degrees_to_int(string):
 
 def int_to_degrees(temp):
     """convert integer to Celsius degrees"""
-    ans = '+' + str(temp) + '°'
+    if temp > 0:
+        return '+' + str(temp) + '°'
     if temp < 0:
-        ans[0] = '-'
-    if temp == 0:
-        return ans[1:]
-    return ans
+        return str(temp) + '°'
+    return '0°'
 
 
 def get_weather(days):
